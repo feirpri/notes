@@ -159,7 +159,7 @@ new Promise((resolve) => {
 ins.$promiseEmit('init', data).then(...)
 ```
 
-	不过 event 的 promise 化，没有普适场景。因为事件的绑定顺序，会影响.then 的接收参数的顺序。这通常是靠不住的。所以...仅在特殊场景下...酌情考虑使用...
+__不过emit 的 Promise化可能没有普适场景。事件的绑定顺序，会影响.then 的接收参数的顺序；并且按Promise.all 的工作方式，如果有任何地方绑定的事件执行出错，都会影响resolve的执行。所以，仅在特殊场景下，在明确event实例的使用范围的时候才考虑使用__
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MDIxMjM4MjRdfQ==
+eyJoaXN0b3J5IjpbMTY4NDI4MTA0OCwtMTgwMjEyMzgyNF19
 -->
