@@ -162,8 +162,9 @@ ins.$promiseEmit('init', data).then(...)
 __不过emit 的 Promise化可能没有普适场景。事件的绑定顺序，会影响.then 的接收参数的顺序；并且按Promise.all 的工作方式，如果有任何地方绑定的事件执行出错，都会影响resolve的执行。所以，仅在特殊场景下，在明确event实例的使用范围的时候才考虑使用__
 
 
-
+## 附相关代码
+FEvent最终实现： [enter link description here](https://github.com/feirpri/notes/blob/master/demo/event/index.js)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjY5Mzk0MTQ2LDE2ODQyODEwNDgsLTE4MD
-IxMjM4MjRdfQ==
+eyJoaXN0b3J5IjpbMTIxNTQ1NzY0OSwxNjg0MjgxMDQ4LC0xOD
+AyMTIzODI0XX0=
 -->
