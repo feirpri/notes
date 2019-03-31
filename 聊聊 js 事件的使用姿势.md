@@ -163,8 +163,8 @@ __不过emit 的 Promise化可能没有普适场景。事件的绑定顺序，�
 
 
 ## 附相关代码
-FEvent最终实现： [enter link description here](https://github.com/feirpri/notes/blob/master/demo/event/index.js)
+FEvent最终实现： [FEvent](https://github.com/feirpri/notes/blob/master/demo/event/index.js)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIxNTQ1NzY0OSwxNjg0MjgxMDQ4LC0xOD
+eyJoaXN0b3J5IjpbMTkzMDc4MTU4NywxNjg0MjgxMDQ4LC0xOD
 AyMTIzODI0XX0=
 -->
