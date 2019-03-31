@@ -1,0 +1,111 @@
+
+## 简单的事件实现：
+```javascript
+function initEventMap(events = {}, eventName) {
+	events[eventName] = events[eventName] || [];
+	return events[eventName]; 
+}
+class FEvent {
+	constructor() {
+		this.events = {};
+	}
+	$on(eventName, handle) {
+		// 记录到 this.events
+		initEventMap(this.events, eventName).push(handle);
+	}
+	$emit(eventName, data) {
+		// 触发：遍历绑定的函数
+		initEventMap(this.events, eventName).forEach(handle => handle(data));
+	}
+	$off(eventName) {}
+}
+
+// use
+const event = new FEvent();
+event.$on(...);
+event.$emit(...);
+```
+
+### 缺陷
+1. 以继承方式使用时，定义的class需要声明 events 属性，使用麻烦；
+2. 如果期望 events 作为私有属性存在，即往后可能改变名称或实现方式，导致继承的对象 events 属性声明失效；
+3. 接收事件响应反馈
+
+
+### 使用姿势：全局方式
+```javascript
+class FEvent{}
+export const event = new FEvent();
+
+// or
+global.event = new FEvent();
+```
+
+#### 好处
+1. 不用实例化，即引即用
+
+#### 缺点
+1. eventName 的管理问题：注意避免意外定义同名事件；
+2. 事件函数需要及时解绑：被绑定的事件函数及其引用的上下文环境，会因为全局引用，不能被释放。
+
+
+### 与业务实例绑定
+DOM、VueComponent 等，都是这种方式
+
+#### 优点
+1. 一般不用担心事件未解绑带来的内存泄漏问题，只要实例能正常销毁即可
+2. 可以减少对事件来源的判断，在特定的业务场景下，这会很有用
+3. 一般不用担心事件定义重名问题
+
+#### 继承方式
+```javascript
+class A extends FEvent {
+	constructor{
+		this.events = {}; // 用于存储实例上的事件
+	}
+}
+
+// use
+const aInstance = new A();
+aInstance.$on(...);
+aInstance.$emit(...);
+```
+#### mixin
+```javascript
+function mixinEvent(target) {
+    const protos = FEvent.prototype;
+    /* eslint-disable no-param-reassign */
+    Object.getOwnPropertyNames(protos).forEach((key) => {
+        if (key === 'constructor') {
+            return;
+        }
+        target.prototype[key] = protos[key];
+    });
+    target.events = {};
+}
+class A {}
+mixinEvent(A);
+
+// use
+const aInstance = new A();
+aInstance.$on(...);
+aInstance.$emit(...);
+```
+
+#### decorates
+```javascript
+@mixinEvent // 实现同 mixin
+class A {}
+```
+
+### 使用场景
+1. 发布订阅者模式
+2. 组件通信
+3. 组件间方法调用，以 vue 为例，避免 ref 的使用
+
+
+### 事件的缺陷
+1. 不能接收某次事件调用的反馈 （学习DOMEvent 的实现）
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE0Mjk2Nzk3MjVdfQ==
+-->
