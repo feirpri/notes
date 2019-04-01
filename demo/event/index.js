@@ -45,7 +45,7 @@ module.exports = class FEvent {
     $promiseEmit(eventName, ...args) {
         const events = getInstanceListeners(this, eventName);
         const defers = events.map(
-            async (handler) => await handler.apply(this, [...args]),
+            async (handler) => handler.apply(this, [...args]),
         );
         return Promise.all(defers);
     }
