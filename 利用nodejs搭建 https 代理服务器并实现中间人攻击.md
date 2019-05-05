@@ -3,13 +3,10 @@
 ## Demo/Result
 
 ## What
-### ENV
-1. nodejs
-
 ### Knowledge
 #### 证书：CA证书 与 域名证书
 
-#### 证书认证过程
+#### https的证书认证过程
 
 
 
@@ -21,5 +18,5 @@
 
 ## 如何在代理中替换https站点的内容
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk5OTAzMjM1NV19
+eyJoaXN0b3J5IjpbLTE2MzQxNDM0NTBdfQ==
 -->
