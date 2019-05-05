@@ -16,7 +16,9 @@
 
 ## 一个简单的隧道代理
 
-## 如何在代理中替换https站点的内容
+## 利用代理服务器替换https站点的内容
+
+## 参考文档
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc5OTgyMDM0NF19
+eyJoaXN0b3J5IjpbOTY1MTk1MzUwXX0=
 -->
