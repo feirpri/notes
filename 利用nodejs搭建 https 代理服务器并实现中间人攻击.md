@@ -1,7 +1,7 @@
 ## Reason
 
 ## Demo/Result
-我在本地启动了一个配置
+我在本地启动了一个代理服务器，并且将 https://www.google.com.hk 的访问，
 
 
 ## What
@@ -24,5 +24,5 @@
 
 ## 参考文档
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYxMjI0NDY1Nyw5OTExMzc4OTZdfQ==
+eyJoaXN0b3J5IjpbMjA3NjMyNjg4NSw5OTExMzc4OTZdfQ==
 -->
