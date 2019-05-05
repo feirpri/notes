@@ -8,6 +8,8 @@
 
 #### https的证书认证过程
 
+#### Proxy VS Request
+
 ## How
 
 ## https代理模式下的证书认证
@@ -16,5 +18,5 @@
 
 ## 如何在代理中替换https站点的内容
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA1Nzg5NTE1NF19
+eyJoaXN0b3J5IjpbLTc5OTgyMDM0NF19
 -->
