@@ -10,6 +10,8 @@
 
 #### Proxy VS Request
 
+#### SNI
+
 ## How
 
 ## https代理模式下的证书认证
@@ -20,5 +22,5 @@
 
 ## 参考文档
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTY1MTk1MzUwXX0=
+eyJoaXN0b3J5IjpbOTkxMTM3ODk2XX0=
 -->
