@@ -8,15 +8,13 @@
 
 #### https的证书认证过程
 
-
-
 ## How
 
-## https代理中的证书认证
+## https代理模式下的证书认证
 
 ## 一个简单的隧道代理
 
 ## 如何在代理中替换https站点的内容
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2MzQxNDM0NTBdfQ==
+eyJoaXN0b3J5IjpbMTA1Nzg5NTE1NF19
 -->
