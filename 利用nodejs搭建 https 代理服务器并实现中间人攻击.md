@@ -1,7 +1,9 @@
 ## Reason
 
 ## Demo/Result
-我在本地启动了一个代理服务器，并且将 https://www.google.com.hk 的访问，
+我在本地启动了一个代理服务器，并注入了一些配置，将对 https://www.google.com.hk 的访问重定向到了我在本机运行的一个 https 服务器。
+
+
 
 
 ## What
@@ -24,5 +26,5 @@
 
 ## 参考文档
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA3NjMyNjg4NSw5OTExMzc4OTZdfQ==
+eyJoaXN0b3J5IjpbLTEyMDIyNTIyODMsOTkxMTM3ODk2XX0=
 -->
