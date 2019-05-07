@@ -1,0 +1,14 @@
+{
+  "name": "proxy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "demo.js",
+  "scripts": {
+    "test": "node demo.js"
+  },
+  "author": "feirpri",
+  "license": "ISC",
+  "dependencies": {
+    "node-forge": "^0.8.2"
+  }
+}
