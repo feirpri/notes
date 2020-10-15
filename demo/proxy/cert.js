@@ -3,6 +3,7 @@ const forge = require('node-forge');
 const path = require('path');
 
 // 读取 CA证书，后面需要根据它创建域名证书
+// 【win】该CA证书需要在mmc控制台中导入到“受信任的根证书颁发机构”
 const caKey = forge.pki.decryptRsaPrivateKey(fs.readFileSync(path.resolve(__dirname, './cert/cakey.pem')));
 const caCert = forge.pki.certificateFromPem(fs.readFileSync(path.resolve(__dirname, './cert/cacert.pem')));
 const certCache = {}; // 缓存证书
@@ -27,7 +28,9 @@ module.exports = function createServerCertificate(domain) {
         cert.validity.notAfter.getFullYear() + 1,
     );
     cert.setIssuer(caCert.subject.attributes);
-    cert.setSubject(caCert.subject.attributes);
+    let _subject = JSON.parse(JSON.stringify( caCert.subject.attributes[0] ));
+    _subject.value = domain;
+    cert.setSubject( [_subject] );
     cert.setExtensions([
         {
             name: 'basicConstraints',
