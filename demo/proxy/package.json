@@ -9,6 +9,6 @@
   "author": "feirpri",
   "license": "ISC",
   "dependencies": {
-    "node-forge": "^0.8.2"
+    "node-forge": "^0.10.0"
   }
 }
