@@ -1,5 +1,4 @@
-# 以JModule的视角学习webpack5的 module federation
-
+# 以JModule的视角学习single-spa
 @copyright 前端技术研讨会
 
 @author 张萍萍、林光辉
