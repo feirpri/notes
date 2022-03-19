@@ -157,15 +157,23 @@ const Button = await JModule.require('app2.Button');
 ```
 
 
-|                 |                          Single-spa                          |                           JModule                            |
-| :-------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-|  **架构概览**   | 1.Applications <br/>2. [single-spa-config](https://zh-hans.single-spa.js.org/docs/configuration)配置 |                                                              |
-| **Root-config** | 1. 所有微前端应用共享的根 HTML 页面<br>2.singleSpa.registerApplication() |                    `JModule.define`子应用                    |
-|  **拆分应用**   |          1. monorepo<br>2.NPM包 <br>3. 动态加载模块          |                 `JModule.applyResource({})`                  |
-|  **本地开发**   | Import map<br>[import-map-overrides ](https://github.com/joeldenning/import-map-overrides)  工具将自动允许您在本地主机和部署版本之间切换一个或多个微前端。 |              子应用配置平台信息即可实现本地开发              |
-|  **资源加载**   | [single-spa加载函数](https://zh-hans.single-spa.js.org/docs/configuration#loading-function-or-application) 为你的应用程序和包裹内置了延迟加载。<br>在需要时下载导入映射中的浏览器内模块 | 预先下载所有JavaScript,在需要执行的时候在执行<br>`<link rel="preload" as="script">` |
-|  **通用模块**   | 唯一目的是为其他微前端导出要导入的功能<br>确保webpack externals和import map正确配置 |                              --                              |
-|  **共享依赖**   | 1.  [运行时import maps](https://zh-hans.single-spa.js.org/docs/recommended-setup#import-maps) <br>2. [构建时module federation](https://zh-hans.single-spa.js.org/docs/recommended-setup#module-federation) |                              --                              |
+| 用法/功能差异     | Single-spa | JModule |
+| :-------------: | :--------: | :-----: |
+| **应用注册** | registerApplication() | new JModule() |
+| **入口资源** | umd js 文件 | 包含应用资源元数据的 js/json 文件 |
+| **子应用声明** | ```export { bootstrap, mount, unmount }``` | ```JModule.define('key', { bootstrap, mount, unmount })``` <br>OR<br> ```JModule.define('key', { routes })``` |
+| **应用拆分** | monorepo 等方式 | 相对更自由，应用入口与子应用本身是一对多的关系，甚至可以在一个文件里声明多个子应用，当然也可以采用monorepo 等方式管理 |
+| **自定义配置** | customProps | module.metadata |
+|  **资源加载** | start() | ```module.load()``` OR ```module.load('load'|'preload', { elementModifier })``` |
+|  **资源加载优化**   | [single-spa加载函数](https://zh-hans.single-spa.js.org/docs/configuration#loading-function-or-application) 为你的应用程序和包裹内置了延迟加载。<br>在需要时下载导入映射中的浏览器内模块 | 通过script的prefetch\preload 实现资源预加载，JModule提供api，具体策略由宿主应用实现 |
+|**子应用激活**| 自封装了路由事件，通过active函数确定激活 | 由宿主应用自行处理子应用的挂载，如果宿主应用本身拥有一个带路由的框架系统，则应用挂载也是件轻松的事 |
+|**本地开发**| Import map<br>[import-map-overrides ](https://github.com/joeldenning/import-map-overrides)  工具将自动允许您在本地主机和部署版本之间切换一个或多个微前端。| 通过webpack插件配置子应用于宿主应用的信息来实现集成开发的目的 |
+|**通用模块**| 唯一目的是为其他微前端导出要导入的功能<br>确保webpack externals和import map正确配置 |```JModule.define('key', { exports });``` 通过定义时的exports 属性导出|
+
+> 1. single-spa 包含更多的lifecycle
+> 1. single-spa 提供了更多的自定义事件
+> 1. JModule 在子应用的拆分上相对更自由
+> 1. JModule 本质上无明确的激活与卸载，由普通的基于的路由的视图渲染实现。
 
 #### single-spa 三种微前端类型：
 
@@ -181,4 +189,7 @@ const Button = await JModule.require('app2.Button');
 
    例如：`application1` 用Vue编写，包含创建用户的所有UI和逻辑。 `application2`是用React编写的，需要创建一个用户。 使用`single-spa parcels`可以让您包装`application1`中的Vue组件。尽管框架不同，但它可以在`application2`内部运行。
 
+   > 类似需求，在 JModule 中通过 exports 属性公开自己的组件，即可以由其它应用使用，如果是用同一框架编写的组件，使用比较自由，但对于跨框架的情况，仍需要子应用自行对其进行兼容处理。
+
 3. utility modules： 无路由、非渲染组件、没有生命周期  <共享通用逻辑>
+   > 从JModule 的角度，如果类似插件组件，通过 exports 属性公开其访问，对于工具组件，仍然欢迎使用 webpack 的代码拆分或者 module federation 功能
